@@ -29,4 +29,7 @@ jobs:
       - name: Validate DAGs
         run: |
           echo "Validating DAG syntax..."
+          export AIRFLOW_HOME="${RUNNER_TEMP}/airflow"
+          mkdir -p "${AIRFLOW_HOME}"
+          airflow db migrate
           airflow dags list || exit 1

@@ -13,3 +13,8 @@
 dags/**/__pycache__/
 dags/**/*.py[cod]
 dags/**/*$py.class
+
+# Track CI workflow files
+!.github/
+!.github/workflows/
+!.github/workflows/**
