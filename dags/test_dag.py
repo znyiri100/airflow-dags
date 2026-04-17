@@ -3,7 +3,7 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime
 
 def print_hello():
-    print("Hello from your test DAG 1!")
+    print("Hello from your test DAG 2!")
     return "Test successful 2!"
 
 with DAG(
