@@ -30,6 +30,8 @@ jobs:
         run: |
           echo "Validating DAG syntax..."
           export AIRFLOW_HOME="${RUNNER_TEMP}/airflow"
+          export AIRFLOW__CORE__DAGS_FOLDER="${GITHUB_WORKSPACE}/dags"
           mkdir -p "${AIRFLOW_HOME}"
           airflow db migrate
-          airflow dags list || exit 1
+          airflow dags list
+          airflow dags list-import-errors
