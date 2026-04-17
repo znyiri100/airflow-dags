@@ -1,26 +1,15 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+# Ignore everything by default
+*
 
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-Thumbs.db
-.codex
+# Allow the dags directory
+!dags/
+# Allow all files and subdirectories inside dags/
+!dags/**
 
-# Airflow logs and transient data
-**/logs/
-airflow.db
-airflow.db-journal
-airflow.db-shm
-airflow.db-wal
-*.pid
+# Allow .gitignore so these rules are versioned
+!.gitignore
 
-# Environment and secrets
-**/.env
-.venv/
-env/
-venv/
-ENV/
+# Still ignore Python artifacts inside dags
+dags/**/__pycache__/
+dags/**/*.py[cod]
+dags/**/*$py.class
