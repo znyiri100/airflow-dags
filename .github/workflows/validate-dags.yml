@@ -31,7 +31,13 @@ jobs:
           echo "Validating DAG syntax..."
           export AIRFLOW_HOME="${RUNNER_TEMP}/airflow"
           export AIRFLOW__CORE__DAGS_FOLDER="${GITHUB_WORKSPACE}/dags"
+          export AIRFLOW__CORE__LOAD_EXAMPLES=False
           mkdir -p "${AIRFLOW_HOME}"
+          echo "GITHUB_WORKSPACE=${GITHUB_WORKSPACE}"
+          echo "AIRFLOW_HOME=${AIRFLOW_HOME}"
+          echo "AIRFLOW__CORE__DAGS_FOLDER=${AIRFLOW__CORE__DAGS_FOLDER}"
+          ls -la "${GITHUB_WORKSPACE}/dags"
           airflow db migrate
-          airflow dags list
-          airflow dags list-import-errors
+          airflow config get-value core dags_folder
+          airflow dags list --subdir "${GITHUB_WORKSPACE}/dags"
+          airflow dags list-import-errors --subdir "${GITHUB_WORKSPACE}/dags"
