@@ -18,8 +18,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Airflow
-        run: pip install apache-airflow==3.1.1
+      - name: Install Airflow + DAG deps
+        run: |
+          AIRFLOW_VERSION=3.1.1
+          PYTHON_VERSION=3.11
+          CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+          pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+          pip install pandas
 
       - name: Validate DAGs
         run: |
