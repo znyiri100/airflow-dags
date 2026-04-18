@@ -26,7 +26,13 @@ jobs:
           pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
           pip install pandas
 
+      - name: Init Airflow DB (ephemeral)
+        run: |
+          export AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="sqlite:////home/runner/airflow.db"
+          airflow db migrate
+
       - name: Validate DAGs
         run: |
           echo "Validating DAG syntax..."
+          export AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="sqlite:////home/runner/airflow.db"
           airflow dags list || exit 1
